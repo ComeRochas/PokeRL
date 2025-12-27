@@ -1,0 +1,17 @@
+# Core RL and Pokemon battle simulation
+poke-env>=0.9.0
+gymnasium>=0.29.0
+
+# Deep Learning frameworks (PyTorch by default, can switch to TensorFlow)
+torch>=2.0.0
+numpy>=1.24.0
+
+# Training utilities
+tensorboard>=2.15.0
+tqdm>=4.65.0
+
+# Configuration management
+pyyaml>=6.0
+
+# Testing and evaluation
+pytest>=7.4.0

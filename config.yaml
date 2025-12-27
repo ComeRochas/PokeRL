@@ -1,0 +1,70 @@
+# PokeRL Configuration File
+# This file allows easy adaptation of all training parameters
+
+# Environment settings
+environment:
+  battle_format: "gen8randombattle"  # Can change to gen9, gen7, etc.
+  
+# Reward function settings
+reward:
+  type: "default"  # Options: default, custom, sparse, dense
+  win_reward: 1.0
+  lose_reward: -1.0
+  faint_reward: 0.1  # Reward for fainting opponent's Pokemon
+  faint_penalty: -0.1  # Penalty for losing own Pokemon
+  hp_delta_weight: 0.01  # Weight for HP change rewards
+  turn_penalty: -0.001  # Small penalty per turn to encourage faster wins
+
+# Observation space settings
+observation:
+  type: "embeddings"  # Options: embeddings, raw, simplified
+  include_stats: true
+  include_types: true
+  include_moves: true
+  include_status: true
+  include_weather: true
+  include_terrain: true
+  normalize: true
+
+# Neural network architecture settings
+network:
+  type: "dqn"  # Options: dqn, dueling_dqn, ppo, a2c
+  hidden_layers: [256, 256, 128]  # Can easily modify architecture
+  activation: "relu"  # Options: relu, tanh, elu
+  dropout: 0.0
+  use_batch_norm: false
+
+# Training settings
+training:
+  algorithm: "dqn"  # Options: dqn, double_dqn, ppo, a2c
+  total_timesteps: 100000
+  learning_rate: 0.0001
+  batch_size: 32
+  gamma: 0.99  # Discount factor
+  epsilon_start: 1.0
+  epsilon_end: 0.05
+  epsilon_decay: 0.995
+  target_update_freq: 1000  # For DQN
+  memory_size: 10000
+  save_freq: 5000  # Save model every N steps
+  log_freq: 100  # Log stats every N steps
+
+# Opponent strategy settings
+opponent:
+  type: "random"  # Options: random, max_damage, smart_switch, trained
+  mix_opponents: false  # Train against multiple opponent types
+  opponent_mix: ["random", "max_damage"]  # If mix_opponents is true
+
+# Testing/Evaluation settings
+evaluation:
+  num_episodes: 100
+  opponent_types: ["random", "max_damage"]
+  render: false
+  save_results: true
+  results_path: "results/"
+
+# Paths
+paths:
+  models: "models/"
+  logs: "logs/"
+  checkpoints: "checkpoints/"
